@@ -1,9 +1,12 @@
+import Banner from "../Banner/Banner";
+import ExtraFeature from "../ExtraFeature/ExtraFeature";
 
 
 const Home = () => {
     return (
-        <div>
-            Home Page
+        <div className="h-[200px]">
+           <Banner></Banner>
+            <ExtraFeature></ExtraFeature>
         </div>
     );
 };

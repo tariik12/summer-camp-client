@@ -1,0 +1,9 @@
+
+.slider-zoom-out .slick-slide {
+    transition: transform 0.10s;
+  }
+  
+  .slider-zoom-out .slick-current {
+    transform: scale(0.8);
+    z-index: 1;
+  }

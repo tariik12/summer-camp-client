@@ -1,17 +1,50 @@
 import { useContext} from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../../Provider/AuthProvider";
+import { toast } from "react-toastify";
+
+const img_hosting_token=import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
 
 const InstructorAddClass = () => {
     const { user } = useContext(AuthContext);
-    const { register, watch, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm();
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
     const onSubmit = (data) => {
+
+        
         data.instructorEmail = user.email;
         data.instructorName = user.displayName;
-        data.price = parseInt(watch('price'));
-        data.seats = parseInt(watch('seats'));
-
-            console.log(data)
+        // data.price = parseInt(watch('price'));
+        // data.seats = parseInt(watch('seats'));
+        const formData = new FormData();
+        formData.append('image',data.image[0]) 
+        fetch(img_hosting_url,{
+            method:'POST',
+            body:  formData
+        })
+        .then(res => res.json())
+        .then(imgResponse =>{
+            if(imgResponse.success){
+                const imgURL = imgResponse.data.display_url;
+               const {instructorEmail,instructorName,languageName,price,seats,} = data
+               const newClass = {instructorName,instructorEmail,languageName,price:parseInt(price),seats:parseInt(seats),image:imgURL, role:'pending'};
+               console.log(newClass)
+                    fetch('http://localhost:5000/classes', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newClass)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.insertedId) {
+                                toast.success('Classes add success Success')
+                            }
+                        })
+            }
+        })
+       
 
     }
     return (
@@ -30,9 +63,9 @@ const InstructorAddClass = () => {
                             </div>
                             <div className="form-control md:w-1/2">
                                 <label className="label">
-                                    <span {...register("languageImage")} className="label-text font-extrabold text-lg">Language Image</span>
+                                    <span  className="label-text font-extrabold text-lg">Language Image</span>
                                 </label>
-                                <input type="file" className="file-input file-input-bordered file-input-md w-full max-w-xs" />
+                                <input type="file" {...register("image")} className="file-input file-input-bordered file-input-md w-full max-w-xs" />
                             </div>
                         </div>
                         <div className="md:flex gap-2">

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FaEdit } from "react-icons/fa";
 const AdminManageUsers = () => {
     
     const [users, setUsers] = useState([])
@@ -71,8 +70,8 @@ console.log(users)
                             <td>
                             <div className="form-control ">
                                 <select onChange={(e) =>{handleAdminInstructor({e,user})}}  className="input input-bordered" required >
-                                    <option >up<FaEdit className="w-8"/></option>
-                                    <option value='student'>student</option>
+                                    <option>Update</option>
+                                    <option value='student'>Student</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Instructor">Instructor</option>
                                 </select>

@@ -4,6 +4,7 @@ import login from '../../assets/login.webp'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { toast } from 'react-toastify';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
     const {  singIn } = useContext(AuthContext)
@@ -70,6 +71,8 @@ const Login = () => {
 
                     </div>
                 </form>
+
+                <SocialLogin></SocialLogin>
             </div>
         </div>
     </div>

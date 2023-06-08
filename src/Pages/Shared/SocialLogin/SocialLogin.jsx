@@ -1,56 +1,47 @@
 import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
-import {  useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
-
 const SocialLogin = () => {
-    const {  handleGoogleProvider } = useContext(AuthContext);
+    const {handleGoogleProvider} = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location?.state?.from?.pathname || '/';
 
-      const handleGoogleLocation = () =>{
-      
-        handleGoogleProvider()
-        .then((result) => {
-          const user = result.user;
-            console.log(user)
-          toast.success('Login Success!', {
-            position: 'top-center',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-          });
-          navigate(from, { replace: true });
+    const from = location.state?.from?.pathname ||"/";
+    const handleGoogleSingIn =() =>{
+      handleGoogleProvider()
+        .then(result =>{
+             const loggedUser =(result.user)
+             console.log(loggedUser)
+            if(loggedUser){
+                const saveUser = { name: loggedUser.displayName, email: loggedUser.email, photo: loggedUser.photoURL, role: 'student' }
+            fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(saveUser)
+            })
+            .then(res => res.json())
+            .then((data) => {
+               console.log(data)
+                    navigate(from, {replace:true});
+                
+            })
+            }
         })
-        .catch((error) => {
-          const errorMessage = error.message;
-          toast.error(errorMessage, {
-            position: 'top-center',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-          });
-        });
-      
-      }
+        .catch(error =>console.log(error.message))
+    }
     return (
-        <div className=" p-10 pt-0">
-        <div className="divider">OR</div>
-          <div>
-            <FaGoogle onClick={handleGoogleLocation } className='ms-32  h-10 w-10 text-cyan-700 hover:text-cyan-400 ' />
-          </div>
-    </div>
+        <div>
+            <div className="divider"></div>
+            <div className="text-center my-4">
+            <button onClick={handleGoogleSingIn} className="btn btn-circle btn-outline">
+               <FaGoogle/>
+            </button>
+            </div>
+        </div>
     );
 };
 

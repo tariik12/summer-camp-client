@@ -20,7 +20,7 @@ const handleLogout = () =>{
     <NavLink to='/' className="me-2">Home</NavLink>
     <NavLink to='/instructors' className="me-2">Instructors</NavLink>
     <NavLink to='/classes' className="me-2">Classes</NavLink>
-    <NavLink to='/dashboard' className="me-2">Dashboard</NavLink>
+    {user && <NavLink to='/dashboard' className="me-2">Dashboard</NavLink>}
 </>
     return (
         <div className="navbar max-w-screen-xl  bg-[#2b25256e] z-10 text-white fixed">

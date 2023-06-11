@@ -2,17 +2,19 @@ import { useContext} from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import GetClasses from "../../../../Hooks/GetClasses/GetClasses";
 
 const img_hosting_token=import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
 
 const InstructorAddClass = () => {
     const { user } = useContext(AuthContext);
+    const [,refetch] = GetClasses()
     const { register, handleSubmit } = useForm();
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
     const onSubmit = (data) => {
 
         
-        data.instructorEmail = user.email;
+        data.email = user.email;
         data.instructorName = user.displayName;
         // data.price = parseInt(watch('price'));
         // data.seats = parseInt(watch('seats'));
@@ -26,8 +28,8 @@ const InstructorAddClass = () => {
         .then(imgResponse =>{
             if(imgResponse.success){
                 const imgURL = imgResponse.data.display_url;
-               const {instructorEmail,instructorName,languageName,price,seats,} = data
-               const newClass = {instructorName,instructorEmail,languageName,price:parseInt(price),seats:parseInt(seats),image:imgURL, role:'pending'};
+               const {email,instructorName,languageName,price,seats,} = data
+               const newClass = {instructorName,email,languageName,price:parseInt(price),seats:parseInt(seats),image:imgURL, role:'pending',seatBooking:0};
                console.log(newClass)
                     fetch('http://localhost:5000/classes', {
                         method: 'POST',
@@ -38,6 +40,7 @@ const InstructorAddClass = () => {
                     })
                         .then(res => res.json())
                         .then(data => {
+                            refetch()
                             if (data.insertedId) {
                                 toast.success('Classes add success Success')
                             }

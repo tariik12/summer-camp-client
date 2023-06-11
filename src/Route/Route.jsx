@@ -14,6 +14,9 @@ import StudentPayment from "../Pages/Dashboard/Student/StudentPaymentHistory/Stu
 import StudentSelectedClass from "../Pages/Dashboard/Student/StudentSelectedClasses/StudentSelectedClass";
 import Classes from "../Pages/Classes/Classes";
 import Instructors from "../Pages/Instructors/Instructors";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 
 export const router = createBrowserRouter([
@@ -49,28 +52,34 @@ export const router = createBrowserRouter([
     },
     {
       path:'/dashboard',
-      element:<Dashboard></Dashboard>,
+      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children:[
         {
           path:'adminManageUsers',
-          element:<AdminManageUsers></AdminManageUsers>
+          element:<AdminRoute><AdminManageUsers></AdminManageUsers></AdminRoute>
         },
         {
           path:'adminManageClass',
-          element:<AdminManageClass></AdminManageClass>
+          element:<AdminRoute><AdminManageClass></AdminManageClass></AdminRoute>
         },
         {
           path:'instructorAddClass',
-          element:<InstructorAddClass></InstructorAddClass>
+          element:<InstructorRoute><InstructorAddClass></InstructorAddClass></InstructorRoute>
         },
         {
           path:'instructorMyClass',
-          element:<InstructorMyClass></InstructorMyClass>
+          element:<InstructorRoute><InstructorMyClass></InstructorMyClass></InstructorRoute>
         },
         
         {
-          path:'studentEnrolled',
-          element:<StudentEnrolled></StudentEnrolled>
+          path:'studentEnrolled/:id',
+          element:<StudentEnrolled></StudentEnrolled>,
+        loader:({params})=> fetch(`http://localhost:5000/studentClassById/${params.id}`,{
+            method:"GET",
+            headers:{
+              Authorization: `Bearer ${localStorage.getItem('access-token')}`
+            }
+          })
         },
         {
           path:'studentPayment',

@@ -1,11 +1,16 @@
 import { FaCalendarAlt, FaHome, FaWallet } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
+import UseAdmin from "../Hooks/UseAdmin/UseAdmin";
+import UseInstructor from "../Hooks/UseInstructor/UseInstructor";
+
 
 
 const Dashboard = () => {
 
-  const admin = true;
-  const Instructor =false;
+  // const isAdmin = true;
+  const [isAdmin] = UseAdmin()
+  const [isInstructor] = UseInstructor();
+  // const isInstructor = false;
     return (
         <div>
             <div className="drawer lg:drawer-open ">
@@ -19,11 +24,11 @@ const Dashboard = () => {
     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
     <ul className="menu p-4 w-80 h-full bg-cyan-700 text-white">
       {
-        admin?<>
+        isAdmin?<>
         <li><NavLink to='/dashboard/adminManageUsers'><FaCalendarAlt/>Manage Users</NavLink></li>
         <li><NavLink to='/dashboard/adminManageClass'><FaHome/>Manage Classes</NavLink></li>
         </>
-        :Instructor?
+        :isInstructor?
         <>
         <li><NavLink to='/dashboard/instructorAddClass'><FaHome/>Add a Class</NavLink></li>
         <li><NavLink to='/dashboard/instructorMyClass'><FaCalendarAlt/>My Classes</NavLink></li>

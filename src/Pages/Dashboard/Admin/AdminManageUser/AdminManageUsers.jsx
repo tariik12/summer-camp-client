@@ -1,30 +1,37 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import { useQuery } from '@tanstack/react-query'
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure/useAxiosSecure';
+import { useState } from 'react';
 const AdminManageUsers = () => {
+    const [active,setActive] = useState(false)
+    const [axiosSecure] = useAxiosSecure();
+    const { refetch, data: users = [] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+                const res = await axiosSecure.get('/users')
+                console.log(res.data)
+                return res.data;
+        },
+    })
     
-    const [users, setUsers] = useState([])
-console.log(users)
-    useEffect(() => {
-        fetch('http://localhost:5000/users')
-            .then(res => res.json())
-            .then(data => {
-                setUsers(data)
-            })
-    }, [])
 
     const handleAdminInstructor = ({e,user}) => {
-        const role= e.target.value
+        setActive(true)
+        const role= e.target.value;
          user.role=role
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`http://localhost:5000/users/manageAdminUsers/${user._id}`, {
             method: "PATCH",
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('access-token')}`
             },
             body: JSON.stringify(user)
         })
             .then(res => res.json())
             .then(data => {
-                if (data.modifiedCount>0) 
-                console.log(role)
+                refetch()
+                if (data.acknowledged) 
+                console.log(data)
             })
         console.log(user)
   
@@ -69,7 +76,7 @@ console.log(users)
                             </td>
                             <td>
                             <div className="form-control ">
-                                <select onChange={(e) =>{handleAdminInstructor({e,user})}}  className="input input-bordered" required >
+                                <select  onClick={active} onChange={(e) =>{handleAdminInstructor({e,user})}}  className="input input-bordered" required >
                                     <option>Update</option>
                                     <option value='student'>Student</option>
                                     <option value="Admin">Admin</option>

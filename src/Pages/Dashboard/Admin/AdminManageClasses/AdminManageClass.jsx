@@ -1,31 +1,46 @@
-import { useEffect, useState } from "react";
-
+// import { useEffect, useState } from "react";
+import { useQuery } from '@tanstack/react-query'
+import { toast } from 'react-toastify';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure/useAxiosSecure';
+import { useState } from 'react';
 
 const AdminManageClass = () => {
-    const [classesData, setClassesData] = useState([])
+const [active,setActive] = useState(false)
+    const [axiosSecure] = useAxiosSecure()
+const { data: classesData = [], refetch : dataReface  } = useQuery({
+    queryKey: ['cl'],
+    queryFn: async () => {
+            const res = await axiosSecure.get('/adminManageClasses')
+            console.log(res.data)
+            return res.data;
+    
+    },
+})
 
-    useEffect(() =>{
-        fetch('http://localhost:5000/classes')
-        .then(res =>res.json())
-        .then(data => {
-            setClassesData(data)
-        })
-    },[])
+// useEffect(() =>{
+//     setClassesData(classesData)
+// },[classesData])
 
     const adminManageClass = ({e,classData}) => {
+        setActive(true)
         const role= e.target.value
          classData.role=role
-        fetch(`http://localhost:5000/classes/${classData._id}`, {
+        fetch(`http://localhost:5000/adminManageClasses/${classData._id}`, {
             method: "PATCH",
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('access-token')}`
             },
             body: JSON.stringify(classData)
         })
             .then(res => res.json())
             .then(data => {
-                if (data.modifiedCount>0) 
-                console.log(role)
+                if (data.modifiedCount>0){
+                    dataReface()
+                    console.log(classData)
+                    toast.success('update success')
+                }
+              
             })
         console.log(classData)
   
@@ -58,7 +73,7 @@ const AdminManageClass = () => {
                                 {classData.instructorName}
                             </td>
                             <td>
-                                {classData.instructorEmail}
+                                {classData.email}
                             </td>
                            
                             <td>
@@ -82,7 +97,7 @@ const AdminManageClass = () => {
                             </td>
                             <td>
                             <div className="form-control ">
-                                <select onChange={(e) =>{adminManageClass({e,classData})}}  className="input input-bordered" required >
+                                <select onClick={active} onChange={(e) =>{adminManageClass({e,classData})}}  className="input input-bordered" required >
                                     <option>Update</option>
                                     <option value='approved'>approved</option>
                                     <option value="pending">pending</option>

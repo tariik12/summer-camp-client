@@ -8,7 +8,7 @@ import PopularInstructor from "../PopularInstuctor/PopularInstructor";
 const Home = () => {
     return (
    
-        <Zoom cascade damping={0.1}>
+        <Zoom cascade damping={0.8}>
        
            <Banner></Banner>
             <PopularClasses></PopularClasses>

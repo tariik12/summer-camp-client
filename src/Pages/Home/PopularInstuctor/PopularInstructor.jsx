@@ -14,7 +14,7 @@ const PopularInstructor = () => {
     return (
         <div className="py-28">
           <ForHeader title={'Popular Instructor'}></ForHeader>
-        <div className="grid  ms-2 grid-cols-1 w-full md:grid-cols-3 gap-4">
+        <div className="grid  mx-auto grid-cols-1 w-full md:grid-cols-3 gap-4">
         {
             popularInstructor.slice(0,6).map(instructor =><div key={instructor._id} className="card w-96 bg-base-100 shadow-xl">
             <img src={instructor.photo} className="w-full h-72" alt="Shoes" />

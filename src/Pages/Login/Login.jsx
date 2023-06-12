@@ -23,7 +23,7 @@ const Login = () => {
             .then((result) => {
               
                     console.log(result.user)
-                    toast("Wow so easy!")
+                    toast.success("Login success!")
                     navigate(from, {replace:true});
             })
             .catch(error => console.log(error.massage))

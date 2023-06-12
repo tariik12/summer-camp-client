@@ -49,7 +49,7 @@ const InstructorAddClass = () => {
                         .then(data => {
                             refetch()
                             if (data.insertedId) {
-                                toast.success('Classes add success Success')
+                                toast.success('Classes add  Success')
                             }
                         })
             }

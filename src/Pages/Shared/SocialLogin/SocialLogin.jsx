@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const SocialLogin = () => {
     const {handleGoogleProvider} = useContext(AuthContext)
@@ -27,6 +28,7 @@ const SocialLogin = () => {
             .then((data) => {
                console.log(data)
                     navigate(from, {replace:true});
+                    toast.success('login success')
                 
             })
             }

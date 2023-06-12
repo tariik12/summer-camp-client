@@ -20,7 +20,7 @@ const student = useLoaderData()
             <h1>StudentEnrolled</h1>
 
             <Elements stripe={stripePromise}>
-                <CheckoutForm price={price}></CheckoutForm>
+                <CheckoutForm price={price} student={student}></CheckoutForm>
             </Elements>
         </div>
     );

@@ -65,7 +65,7 @@ const {user} =UseAuth()
                         </td>
                         <td>
                             <button>{selectedClasses?.role}</button>
-                            <button>{selectedClasses?._id}</button>
+                            
                         </td>
                         <td>
                         {/* <div className="form-control ">
@@ -78,7 +78,7 @@ const {user} =UseAuth()
                         </div> */}
 <Link  to={`/dashboard/studentEnrolled/${selectedClasses._id}`} ><button className="btn"
   >pay</button></Link>
-                        <button className="btn">delete</button>
+                        <button  className="btn">delete</button>
                         </td>
                     </tr>)}
                 </tbody>

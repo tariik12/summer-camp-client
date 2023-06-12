@@ -87,9 +87,8 @@ const Classes = () => {
                  <p>Booking Seat:{singleClass.seatBooking}</p>
                  <p>Booking Seat:{singleClass.role}</p>
                  <div className="card-actions justify-end">
-                    <button  onClick={() => handleBooking(singleClass)} disabled={!user || isAdmin || isInstructor} className="btn btn-outline">Booking</button>
-     {/* <button onClick={()=>handleBooking(singleClass,singleClass._id)}  className="btn btn-outline">Booking</button> */}
-                   <div className="badge badge-outline">Products</div>
+                    <button  onClick={() => handleBooking(singleClass,singleClass._id)} disabled={ isAdmin || isInstructor} className="btn btn-outline">Booking</button>
+                  
                  </div>
                </div>
                </div>

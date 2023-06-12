@@ -5,23 +5,26 @@ import { toast } from "react-toastify";
 
 const InstructorUpdateClass = () => {
     const classesData = useLoaderData()
-    console.log(classesData)
-    const { register, handleSubmit } = useForm();
-
-    const { email,instructorName,languageName,price,role,seatBooking,seats, _id } = classesData;
+    const { register, handleSubmit, watch } = useForm();
+    const { email, instructorName, languageName, role, seatBooking, _id, price, seats } = classesData;
 
     const onSubmit = (data) => {
-        fetch(`${_id}`, {
+        const price = parseInt(watch('price'))
+        const seats = parseInt(watch('seats'))
+        data.price = price
+        data.seats = seats
+        fetch(`http://localhost:5000/classes/${_id}`, {
             method: "PATCH",
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('access-token')}`
             },
             body: JSON.stringify(data)
         })
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    toast.success("Your Toy Update Successful");
+                    toast.success("Your  Update Successful");
                 }
                 console.log(data)
             })
@@ -55,14 +58,14 @@ const InstructorUpdateClass = () => {
                                 <label className="label">
                                     <span className="label-text font-extrabold text-lg"> Language Name</span>
                                 </label>
-                                <input defaultValue={languageName} type="text"  className="input input-bordered" readOnly />
+                                <input defaultValue={languageName} type="text" className="input input-bordered" readOnly />
                             </div>
-                       
+
                             <div className="form-control md:w-1/2">
                                 <label className="label">
                                     <span className="label-text font-extrabold text-lg">Price</span>
                                 </label>
-                                <input defaultValue={price} {...register("price")} type="number" placeholder="Add Available Quantity Note: ONLY NUMBER ADD" className="input input-bordered" required />
+                                <input defaultValue={price}  {...register("price")} type="number" placeholder="" className="input input-bordered" required />
                             </div>
 
                         </div>
@@ -78,20 +81,20 @@ const InstructorUpdateClass = () => {
                                 <label className="label">
                                     <span className="label-text font-extrabold text-lg"> Booking Seat</span>
                                 </label>
-                                <input defaultValue={seatBooking}  className="input input-bordered" placeholder="Enter Rating" readOnly />
+                                <input defaultValue={seatBooking} className="input input-bordered" placeholder="Enter Rating" readOnly />
                             </div>
                         </div>
                         <div className="form-control ">
                             <label className="label">
                                 <span className="label-text font-extrabold text-lg">Total Seats</span>
                             </label>
-                            <input defaultValue={seats} {...register("seats")} className="input input-bordered" placeholder="Enter Rating" required />
+                            <input defaultValue={seats}  {...register("seats")} className="input input-bordered" placeholder="Enter Rating" required />
                         </div>
                         <div className="form-control mt-6">
                             <input type="submit" value='submit' className="text-xl font-extrabold btn btn-primary btn-outline" />
                         </div>
                     </div>
-                   
+
                 </form>
             </div>
         </div>

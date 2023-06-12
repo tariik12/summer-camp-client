@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import UseAuth from "../../Hooks/UseAuth/UseAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-// import UseAdmin from "../../Hooks/UseAdmin/UseAdmin";
-// import UseInstructor from "../../Hooks/UseInstructor/UseInstructor";
+import UseAdmin from "../../Hooks/UseAdmin/UseAdmin";
+import UseInstructor from "../../Hooks/UseInstructor/UseInstructor";
 // import { useState } from "react";
 
 
@@ -14,8 +14,8 @@ const Classes = () => {
   console.log(user)
   const navigate = useNavigate()
     const location = useLocation()
-  // const [isAdmin] = UseAdmin();
-  // const [isInstructor] = UseInstructor();
+  const [isAdmin] = UseAdmin();
+  const [isInstructor] = UseInstructor();
   const [axiosSecure] = useAxiosSecure();
   const { data: classes = [], } = useQuery(['classes'], async () => {
     const res = await axiosSecure.get('/ShowClasses')
@@ -68,9 +68,9 @@ const Classes = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {
           classes.map(singleClass => <div key={singleClass._id}  className="card w-96 bg-base-100 shadow-xl">
-               <div >
+               <div  className={ singleClass.seats<=0  ? "bg-red-200 blur-sm" : ""} >
                <img src={singleClass.image} className="w-full h-72" alt="Shoes" />
-               <div className="card-body">
+               <div className="card-body" >
                  <h2 className="card-title">
                    Learn:  {singleClass.languageName}
                    <div className="badge badge-secondary">NEW</div>
@@ -87,8 +87,8 @@ const Classes = () => {
                  <p>Booking Seat:{singleClass.seatBooking}</p>
                  <p>Booking Seat:{singleClass.role}</p>
                  <div className="card-actions justify-end">
-                    {/* <button  onClick={() => handleBooking(singleClass)} disabled={!user || isAdmin || isInstructor} className="btn btn-outline">Booking</button> */}
-     <button onClick={()=>handleBooking(singleClass,singleClass._id)}  className="btn btn-outline">Booking</button>
+                    <button  onClick={() => handleBooking(singleClass)} disabled={!user || isAdmin || isInstructor} className="btn btn-outline">Booking</button>
+     {/* <button onClick={()=>handleBooking(singleClass,singleClass._id)}  className="btn btn-outline">Booking</button> */}
                    <div className="badge badge-outline">Products</div>
                  </div>
                </div>

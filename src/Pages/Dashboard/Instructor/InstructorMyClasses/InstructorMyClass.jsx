@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
 import GetClasses from "../../../../Hooks/GetClasses/GetClasses";
 
 
 const InstructorMyClass = () => {
     const [classes] = GetClasses();
-
+    const total = classes.reduce((sum, item) => sum + item.seatBooking, 0);
     console.log(classes)
     return (
         <div>
         <h1>AdminManageUsers : {classes.length}</h1>
+        <h1>Total Enrolled Student : {total}</h1>
         <div className="overflow-x-auto w-full">
             <table className="table">
                 {/* head */}
@@ -44,6 +46,9 @@ const InstructorMyClass = () => {
                         </td>
                         <td>
                        {user.seatBooking}
+                        </td>
+                        <td>
+                      <Link to={`/classes/${user._id}`}> <button>update</button></Link>
                         </td>
                     </tr>)}
                 </tbody>

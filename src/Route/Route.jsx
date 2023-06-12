@@ -18,6 +18,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import ShowStudentEnrolledClass from "../Pages/Dashboard/Student/ShowStudentEnrolledClass/ShowStudentEnrolledClass";
+import InstructorUpdateClass from "../Pages/Dashboard/Instructor/InstructorUpdateClass/InstructorUpdateClass";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,16 @@ export const router = createBrowserRouter([
         {
           path:'/classes',
           element:<Classes></Classes>
+        },
+        {
+          path:'/classes/:id',
+          element:<InstructorUpdateClass></InstructorUpdateClass>,
+        loader:({params})=> fetch(`http://localhost:5000/classes/${params.id}`,{
+            method:"GET",
+            headers:{
+              Authorization: `Bearer ${localStorage.getItem('access-token')}`
+            }
+          })
         },
         {
           path:'instructors',

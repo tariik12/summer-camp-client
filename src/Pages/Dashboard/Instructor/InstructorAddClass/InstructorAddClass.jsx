@@ -15,7 +15,7 @@ const InstructorAddClass = () => {
      
         
    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
-   const { register, handleSubmit } = useForm();
+   const { register, handleSubmit ,reset} = useForm();
 
 
     const onSubmit = (data) => {
@@ -53,6 +53,7 @@ const InstructorAddClass = () => {
                             }
                         })
             }
+                reset()
         })
        
 

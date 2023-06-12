@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ForHeader from "../../../Hooks/ForHeader/ForHeader";
 
 
 const PopularClasses = () => {
@@ -13,6 +14,7 @@ const PopularClasses = () => {
     },[])
     return (
         <div className="">
+          <ForHeader title='Popular Classes'></ForHeader>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {
             popularClasses.slice(0,6).map(singleClass => <div key={singleClass._id} className="card w-96 bg-base-100 shadow-xl">

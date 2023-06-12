@@ -98,7 +98,7 @@ const { data: classesData = [], refetch : dataReface  } = useQuery({
                             <td>
                             <div className="form-control ">
                                 <select onClick={active} onChange={(e) =>{adminManageClass({e,classData})}}  className="input input-bordered" required >
-                                    <option>Update</option>
+                                    <option >Update</option>
                                     <option value='approved'>approved</option>
                                     <option value="pending">pending</option>
                                     <option value="decd">decd</option>

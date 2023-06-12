@@ -36,7 +36,7 @@ const Dashboard = () => {
         :
         <>
         <li><NavLink to='/dashboard/studentSelectedClass'><FaHome/>My Selected Classes</NavLink></li>
-        <li><NavLink to='/dashboard/studentEnrolled'><FaCalendarAlt/>My Enrolled Classes</NavLink></li>
+        <li><NavLink to='/dashboard/ShowStudentEnrolledClass'><FaCalendarAlt/>My Enrolled Classes</NavLink></li>
         <li><NavLink to='/dashboard/studentPayment'><FaWallet/> Payment History</NavLink></li>
         </>
       }

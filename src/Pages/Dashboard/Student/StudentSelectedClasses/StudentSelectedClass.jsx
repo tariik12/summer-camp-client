@@ -3,16 +3,51 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure/useAxiosSecure";
 import UseAuth from "../../../../Hooks/UseAuth/UseAuth";
 
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const StudentSelectedClass = () => {
 const {user} =UseAuth()
     const [axiosSecure] = useAxiosSecure()
-    const { data: selectedClasses = [], } = useQuery(['selected'], async () => {
+    const { data: selectedClasses = [], refetch } = useQuery(['selected'], async () => {
         const res = await axiosSecure.get(`/studentClass/${user.email}`)
         console.log(res.data)
         return res.data;
       })
+      const handleDelete = (_id) => {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                
+                fetch(`http://localhost:5000/studentClass/${_id}`,{
+                    method:'DELETE'
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.deletedCount){
+                        refetch()
+                Swal.fire(
+                'Deleted!',
+                'Your Class has been deleted.',
+                'success'
+              )
+        
+                    }
+                })
+           
+            }
+          })
+        console.log(_id)
+      
+    }
     return (
         <div>
         <h1>AdminManageClass {selectedClasses.length}</h1>
@@ -59,7 +94,7 @@ const {user} =UseAuth()
                         <td>
                             <div className="avatar">
                                 <div className="mask border w-12 h-12">
-                                    <img src={selectedClasses.image} alt="Avatar Tailwind CSS Component" />
+                                    <img src={selectedClasses.photo} alt="Avatar Tailwind CSS Component" />
                                 </div>
                             </div>
                         </td>
@@ -78,7 +113,7 @@ const {user} =UseAuth()
                         </div> */}
 <Link  to={`/dashboard/studentEnrolled/${selectedClasses._id}`} ><button className="btn"
   >pay</button></Link>
-                        <button  className="btn">delete</button>
+                        <button onClick={()=>handleDelete(selectedClasses._id)} className="btn">delete</button>
                         </td>
                     </tr>)}
                 </tbody>

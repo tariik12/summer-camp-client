@@ -17,6 +17,7 @@ import Instructors from "../Pages/Instructors/Instructors";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
+import ShowStudentEnrolledClass from "../Pages/Dashboard/Student/ShowStudentEnrolledClass/ShowStudentEnrolledClass";
 
 
 export const router = createBrowserRouter([
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
         {
           path:'studentSelectedClass',
           element:<StudentSelectedClass></StudentSelectedClass>
+        },
+        {
+          path:'ShowStudentEnrolledClass',
+          element:<ShowStudentEnrolledClass></ShowStudentEnrolledClass>
         },
         
 

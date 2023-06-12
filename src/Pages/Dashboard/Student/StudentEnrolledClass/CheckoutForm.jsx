@@ -85,7 +85,7 @@ const CheckoutForm = ({ price, student }) => {
         classId: student.classId,
         price: student.price,
         transactionId: paymentIntent.id,
-        data: new Date(),
+        date: new Date(),
         status: paymentIntent.status,
         seatBooking: student.seatBooking+1,
         seats: student.seats -1,

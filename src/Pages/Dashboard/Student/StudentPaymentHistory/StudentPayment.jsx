@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import UseAuth from "../../../../Hooks/UseAuth/UseAuth";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure/useAxiosSecure";
+import moment from "moment/moment";
 
 
 const StudentPayment = () => {
@@ -27,6 +28,7 @@ const StudentPayment = () => {
                         <th>TransactionId:</th>
                         <th>Price</th>
                         <th>status</th>
+                        <th>Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +46,10 @@ const StudentPayment = () => {
                         <td>
                             {user.status}
                         </td>
+                        <td>
+                       { moment(user.date).format('MMMM Do YYYY, h:mm:ss a')}
+                        </td>
+
                     </tr>)}
                 </tbody>
             </table>

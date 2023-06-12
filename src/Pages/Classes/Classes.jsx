@@ -68,7 +68,7 @@ const Classes = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {
           classes.map(singleClass => <div key={singleClass._id}  className="card w-96 bg-base-100 shadow-xl">
-               <div  className={ singleClass.seats<=0  ? "bg-red-200 blur-sm" : ""} >
+               <div  className={ singleClass.seats<=0  ? "bg-red-200 " : ""} >
                <img src={singleClass.image} className="w-full h-72" alt="Shoes" />
                <div className="card-body" >
                  <h2 className="card-title">

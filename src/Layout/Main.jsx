@@ -23,7 +23,7 @@ const handleLight =() =>{
           <Navbar></Navbar>
           
     
-      <div className=' text-center  absolute z-10  mt-4 md:mt-6 ms-64 md:ms-[420px] '>
+      <div className=' text-center fixed  z-10  mt-4 md:mt-6 ms-64 md:ms-[420px] '>
        {
         toggle ? < BsBrightnessHigh className='me-5  text-4xl font-bold text-white'  onClick={handleDark}/> :< BsSun className='me-5 text-4xl font-bold ' onClick={handleLight}/>
                 

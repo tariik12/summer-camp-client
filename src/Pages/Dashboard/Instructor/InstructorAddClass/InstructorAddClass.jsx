@@ -38,7 +38,7 @@ const InstructorAddClass = () => {
                const {email,instructorName,languageName,price,seats,} = data
                const newClass = {instructorName,email,languageName,price:parseInt(price),seats:parseInt(seats),image:imgURL, role:'pending',seatBooking:0,};
                console.log(newClass)
-                    fetch('http://localhost:5000/classes', {
+                    fetch('https://summer-language-camp-server.vercel.app/classes', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

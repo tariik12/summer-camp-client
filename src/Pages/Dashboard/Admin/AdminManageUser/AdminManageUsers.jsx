@@ -19,7 +19,7 @@ const AdminManageUsers = () => {
         setActive(true)
         const role= e.target.value;
          user.role=role
-        fetch(`http://localhost:5000/users/manageAdminUsers/${user._id}`, {
+        fetch(`https://summer-language-camp-server.vercel.app/users/manageAdminUsers/${user._id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json',

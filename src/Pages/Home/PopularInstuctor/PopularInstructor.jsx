@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const PopularInstructor = () => {
     const [popularInstructor, setPopularInstructor] = useState([])
     useEffect(() =>{
-        fetch('http://localhost:5000/ShowInstructor')
+        fetch('https://summer-language-camp-server.vercel.app/ShowInstructor')
         .then(res =>res.json())
         .then(data =>{
             setPopularInstructor(data)

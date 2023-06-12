@@ -30,7 +30,7 @@ const Classes = () => {
 
         const { email: instructorEmail, instructorName, languageName, price, seats, seatBooking , } = singleClass
         const studentClass = { instructorName, instructorEmail, studentEmail, languageName, price, seats, seatBooking,classId };
-        fetch('http://localhost:5000/studentClass', {
+        fetch('https://summer-language-camp-server.vercel.app/studentClass', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

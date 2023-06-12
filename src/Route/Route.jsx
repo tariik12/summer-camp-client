@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
         {
           path:'/classes/:id',
           element:<InstructorUpdateClass></InstructorUpdateClass>,
-        loader:({params})=> fetch(`http://localhost:5000/classes/${params.id}`,{
+        loader:({params})=> fetch(`https://summer-language-camp-server.vercel.app/classes/${params.id}`,{
             method:"GET",
             headers:{
               Authorization: `Bearer ${localStorage.getItem('access-token')}`
@@ -86,7 +86,7 @@ export const router = createBrowserRouter([
         {
           path:'studentEnrolled/:id',
           element:<StudentEnrolled></StudentEnrolled>,
-        loader:({params})=> fetch(`http://localhost:5000/studentClassById/${params.id}`,{
+        loader:({params})=> fetch(`https://summer-language-camp-server.vercel.app/studentClassById/${params.id}`,{
             method:"GET",
             headers:{
               Authorization: `Bearer ${localStorage.getItem('access-token')}`

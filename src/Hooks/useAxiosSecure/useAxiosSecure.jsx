@@ -4,7 +4,7 @@ import UseAuth from '../UseAuth/UseAuth';
 import { useEffect } from 'react';
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000/', 
+  baseURL: 'https://summer-language-camp-server.vercel.app/', 
 });
 
 const useAxiosSecure = () => {

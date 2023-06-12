@@ -102,7 +102,7 @@ const CheckoutForm = ({ price, student }) => {
                 seats: student.seats -1,
               }
 
-    fetch(`http://localhost:5000/ShowClasses/${student.classId}`, {
+    fetch(`https://summer-language-camp-server.vercel.app/ShowClasses/${student.classId}`, {
       method: "PATCH",
       headers: {
         'content-type': 'application/json',

@@ -13,7 +13,7 @@ const InstructorUpdateClass = () => {
         const seats = parseInt(watch('seats'))
         data.price = price
         data.seats = seats
-        fetch(`http://localhost:5000/classes/${_id}`, {
+        fetch(`https://summer-language-camp-server.vercel.app/classes/${_id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json',

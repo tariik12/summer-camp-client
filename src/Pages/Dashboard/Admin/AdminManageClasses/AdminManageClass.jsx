@@ -25,7 +25,7 @@ const { data: classesData = [], refetch : dataReface  } = useQuery({
         setActive(true)
         const role= e.target.value
          classData.role=role
-        fetch(`http://localhost:5000/adminManageClasses/${classData._id}`, {
+        fetch(`https://summer-language-camp-server.vercel.app/adminManageClasses/${classData._id}`, {
             method: "PATCH",
             headers: {
                 'content-type': 'application/json',

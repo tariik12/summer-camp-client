@@ -55,7 +55,7 @@ const Login = () => {
                             minLength: 6,
                             maxLength: 20,
                             pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/
-                        })} type="text" placeholder="password" className="input input-bordered" />
+                        })} type="password" placeholder="password" className="input input-bordered" />
                         {errors.password?.type === 'required' && <p className='text-red-700' >Password is required</p>}
                         {errors.password?.type === 'minLength' && <p className='text-red-700' >Password must be 6 charector</p>}
                         {errors.password?.type === 'maxLength' && <p className='text-red-700' >Password must be 6 charector</p>}

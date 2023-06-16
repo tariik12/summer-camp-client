@@ -15,10 +15,10 @@ const PopularClasses = () => {
     return (
         <div className="">
           <ForHeader title='Popular Classes'></ForHeader>
-        <div className="grid grid-cols-1 mx-auto md:grid-cols- gap-4">
+        <div className="grid grid-cols-1  md:grid-cols-3 md:gap-4 mx-4 ">
           {
-            popularClasses.slice(0,6).map(singleClass => <div key={singleClass._id} className="card w-96 bg-base-100 shadow-xl">
-              <img src={singleClass.image} className="w-full h-72" alt="Shoes" />
+            popularClasses.slice(0,6).map(singleClass => <div key={singleClass._id} className="card mb-4 w-full bg-base-100 shadow-xl">
+              <img src={singleClass.image} className="w-full h-72 rounded-md" alt="Shoes" />
               <div className="card-body">
                 <h2 className="card-title">
                   Learn:  {singleClass.languageName}

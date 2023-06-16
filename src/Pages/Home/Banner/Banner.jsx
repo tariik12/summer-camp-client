@@ -26,6 +26,7 @@ const Banner = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
+    className:'btn btn-outline'
 
 
   };
@@ -34,7 +35,7 @@ const Banner = () => {
 
 
   return (
-    <div className="mb-20  h-[400px] md:h-[600px] w-full overflow-hidden md:overflow-visible"  >
+    <div className="mb-20 px-7  h-[400px] md:h-[600px] w-full overflow-hidden md:overflow-visible"  >
       <Slider {...settings} className="">
         <div className=""  >
           <div className="flex h-[400px] md:h-[600px] text-white justify-center items-center bg-cover bg-no-repeat " style={{

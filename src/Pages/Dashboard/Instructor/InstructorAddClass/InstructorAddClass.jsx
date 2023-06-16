@@ -44,7 +44,7 @@ const InstructorAddClass = () => {
                             'content-type': 'application/json'
                         },
                         body: JSON.stringify(newClass)
-                    })
+                    }) 
                         .then(res => res.json())
                         .then(data => {
                             refetch()

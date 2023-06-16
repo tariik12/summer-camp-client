@@ -12,9 +12,9 @@ console.log()
         .then(data =>setExtraData(data))
     },[])
     return (
-        <div className=" mb-10 text-center">
+        <div className="">
           <ForHeader title={'Why Do You Learn foreign Language ?'}></ForHeader>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mx-4'>
         {
           extraData.map((data,index) =><CardShow key={index} image={data.image} name={data.name} description={data.description}></CardShow>)
         }

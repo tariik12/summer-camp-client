@@ -44,14 +44,14 @@ const handleLogout = () =>{
         {navItems}
     </ul>
   </div>
-  <div className="navbar-end">
+  <div className="navbar-end me-5">
   {user ? <>
     <div className="avatar online me-2 md:me-5">
   <div className="w-8 md:w-16 rounded-full">
     <img src={user.photoURL} />
   </div>
 </div>
-  <li className="btn btn-info btn-outline btn-sm md:btn-md"><NavLink onClick={handleLogout
+  <li className="btn btn-info btn-outline btn-sm md:btn-md "><NavLink onClick={handleLogout
     } to='/' className={({ isActive, isPending }) =>
       isPending ? "pending" : isActive ? "active" : ""
     }>Logout</NavLink></li>

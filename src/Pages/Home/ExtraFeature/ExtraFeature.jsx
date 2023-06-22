@@ -12,7 +12,7 @@ console.log()
         .then(data =>setExtraData(data))
     },[])
     return (
-        <div className="">
+        <div className="mb-10">
           <ForHeader title={'Why Do You Learn foreign Language ?'}></ForHeader>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mx-4'>
         {

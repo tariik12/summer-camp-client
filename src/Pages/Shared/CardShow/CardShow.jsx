@@ -15,7 +15,7 @@ const CardShow = ({name, image}) => {
               <img src={image} className="h-48 w-48  mt-5 rounded-3xl  " alt="" />
         
             <Link>
-            <h1 className="  mx-auto card-title text-2xl mt-5 absolute text-cyan-300 font-bold">{name.slice(0,10)}....</h1>
+            <h1 className="  mx-auto card-title text-2xl mt-5 absolute visible hover:invisible text-cyan-300 font-bold">{name.slice(0,10)}....</h1>
              <FaAngleDoubleRight className=" mb-5   text-2xl mx-auto text-cyan-300  "/>
             </Link>
             

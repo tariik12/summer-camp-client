@@ -10,7 +10,7 @@ const GetClasses = () => {
         enabled: !loading && !!user?.email,
         queryFn: async () => {
             if (!loading && !!user?.email) {
-                const res = await axiosSecure(`/classes?email=${user?.email}`,)
+                const res = await axiosSecure(`/EmailClasses?email=${user?.email}`,)
                 console.log(res.data)
                 return res.data;
             }

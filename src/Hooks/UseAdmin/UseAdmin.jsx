@@ -15,6 +15,7 @@ console.log('Is admin response', res)
         return res.data.admin
     }
   })
+  console.log(isAdmin,isAdminLoading)
   return[isAdmin,isAdminLoading]
 };
 

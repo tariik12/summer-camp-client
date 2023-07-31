@@ -15,7 +15,9 @@ const Classes = () => {
   const navigate = useNavigate()
     const location = useLocation()
   const [isAdmin] = UseAdmin();
+   console.log(isAdmin)
   const [isInstructor] = UseInstructor();
+  console.log(isInstructor)
   const [axiosSecure] = useAxiosSecure();
   const { data: classes = [], } = useQuery(['classes'], async () => {
     const res = await axiosSecure.get('/ShowClasses')
@@ -28,7 +30,7 @@ const Classes = () => {
         if(user && user.email){
           const studentEmail = user?.email
 
-        const { email: instructorEmail, instructorName, languageName, price, seats, seatBooking , } = singleClass
+        const { email: instructorEmail, instructorName, languageName, price, seats, seatBooking} = singleClass
         const studentClass = { instructorName, instructorEmail, studentEmail, languageName, price, seats, seatBooking,classId };
         fetch('https://summer-language-camp-server.vercel.app/studentClass', {
           method: 'POST',
@@ -68,7 +70,7 @@ const Classes = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {
           classes.map(singleClass => <div key={singleClass._id}  className="card w-96 bg-base-100 shadow-xl">
-               <div  className={ singleClass.seats<=0  ? "bg-red-200 " : ""} >
+               <div  className={ singleClass.seats<= 0  ? "bg-red-200 " : ""} >
                <img src={singleClass.image} className="w-full h-72" alt="Shoes" />
                <div className="card-body" >
                  <h2 className="card-title">

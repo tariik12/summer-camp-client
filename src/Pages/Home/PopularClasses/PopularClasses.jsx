@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ForHeader from "../../../Hooks/ForHeader/ForHeader";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { FaArrowRight, FaBookmark,  } from "react-icons/fa";
 import { BsBookmarks } from "react-icons/bs";
 import { MdOutlinePayments } from "react-icons/md";
@@ -14,13 +15,17 @@ const PopularClasses = () => {
             setPopularClasses(data)
         })
     },[])
+
+    useEffect(() =>{
+      AOS.init();
+    },[])
     return (
         <div className="">
           <ForHeader title='Popular Classes'></ForHeader>
         <div className="grid grid-cols-1  md:grid-cols-3 md:gap-4 mx-4 ">
           {
             popularClasses.slice(0,6).map(singleClass => <div key={singleClass._id} className="card mb-4 w-full bg-base-100  shadow-lg hover:opacity-90 duration-75 hover:bg-slate-100  ">
-              <div className="stats shadow">
+              <div className="stats shadow" data-aos="flip-down">
   
   {/* <div className="stat">
     <div className="stat-figure text-primary">

@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure/useAxiosSecure";
 import UseAuth from "../../../../Hooks/UseAuth/UseAuth";
+import { Navigate } from "react-router-dom";
 // import './checkout.css'
 
 
@@ -147,6 +148,7 @@ return (
     </form>
     {cardError && <p className="text-red-600">{cardError}</p>}
     {transactionId && <p className="text-green-700">Transaction complete with transactionId</p>}
+    {  Navigate('/')}
   </div>
 );
 };

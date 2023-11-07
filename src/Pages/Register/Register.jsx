@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import login from '../../assets/login.webp'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { toast } from 'react-toastify';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
@@ -13,7 +13,10 @@ const Register = () => {
     const [toggle2, setToggle2] = useState(false);
 
     const { createUser, updateUserProfile } = useContext(AuthContext)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname ||"/";
     const {
         register,
         handleSubmit,
@@ -39,9 +42,9 @@ const Register = () => {
                         .then(res => res.json())
                         .then(data => {
                             if (data.insertedId) {
-                                reset()
                                 toast.success('SingIn Success')
-                                navigate('/')
+                                navigate(from, {replace:true});
+                                reset()
                             }
                         })
     

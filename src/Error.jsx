@@ -10,7 +10,7 @@ const Error = () => {
           }}>
           
             <img className='mx-auto ' src={fourZeroFour} alt="" />
-              <p className='text-center text-4xl font-extrabold text-red-600 '>  Not Fount Page</p>
+              <p className='text-center text-4xl font-extrabold text-red-600 '>  Not Fount Page </p>
         </div>
     );
 };

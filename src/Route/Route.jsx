@@ -20,6 +20,8 @@ import InstructorRoute from "./InstructorRoute";
 import ShowStudentEnrolledClass from "../Pages/Dashboard/Student/ShowStudentEnrolledClass/ShowStudentEnrolledClass";
 import InstructorUpdateClass from "../Pages/Dashboard/Instructor/InstructorUpdateClass/InstructorUpdateClass";
 
+import ShowExtraDataDetails from "../Pages/Shared/CardShow/ShowExtraDataDetails";
+
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +46,11 @@ export const router = createBrowserRouter([
         {
           path:'/classes',
           element:<Classes></Classes>
+        },
+        {
+path:'/details/:name',
+element:<ShowExtraDataDetails></ShowExtraDataDetails>,
+loader:({params}) => fetch('extra.json'), 
         },
         {
           path:'/classes/:id',

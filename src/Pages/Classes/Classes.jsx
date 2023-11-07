@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UseAdmin from "../../Hooks/UseAdmin/UseAdmin";
 import UseInstructor from "../../Hooks/UseInstructor/UseInstructor";
-// import { useState } from "react";
 
 
 const Classes = () => {

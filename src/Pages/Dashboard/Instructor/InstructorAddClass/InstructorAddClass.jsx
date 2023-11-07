@@ -47,9 +47,9 @@ const InstructorAddClass = () => {
                     }) 
                         .then(res => res.json())
                         .then(data => {
-                            refetch()
                             if (data.insertedId) {
                                 toast.success('Classes add  Success')
+                                refetch()
                             }
                         })
             }

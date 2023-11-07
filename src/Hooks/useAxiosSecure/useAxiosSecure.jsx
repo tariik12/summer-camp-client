@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import UseAuth from '../UseAuth/UseAuth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const axiosSecure = axios.create({
   baseURL: 'https://summer-language-camp-server.vercel.app', 
@@ -10,7 +10,8 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const { logOut } =UseAuth(); 
   const navigate = useNavigate(); 
-  
+  const [retryCount, setRetryCount] = useState(0);
+  const maxRetries = 3;
 
   useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {
@@ -28,10 +29,14 @@ const useAxiosSecure = () => {
           await logOut();
           navigate('/login');
         }
+        if (error.message === 'Network Error' && retryCount < maxRetries) {
+          setRetryCount(retryCount + 1);
+          return axiosSecure(error.config);
+        }
         return Promise.reject(error);
       }
     );
-  }, [logOut, navigate]);
+  }, [logOut, navigate,retryCount]);
 
   return [axiosSecure];
 };
